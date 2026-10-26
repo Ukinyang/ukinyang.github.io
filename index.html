@@ -57,6 +57,7 @@ h1 { font-size: clamp(2.6rem, 6vw, 4.4rem); line-height: 1.02; }
 h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); line-height: 1.12; }
 h3 { font-size: 1.25rem; line-height: 1.25; }
 p { margin: 0; }
+@media (min-width: 700px) { p { text-align: justify; hyphens: auto; -webkit-hyphens: auto; } .close p, p.by, figcaption p { text-align: inherit; } }
 .lede { font-size: 1.15rem; color: var(--muted); max-width: 62ch; }
 .eyebrow { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); font-weight: 500; }
 .head { display: flex; flex-direction: column; gap: 12px; }
