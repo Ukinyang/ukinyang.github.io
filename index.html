@@ -1,0 +1,960 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Ukeme Inyang, marine ecologist and environmental data analyst based in Bremen, Germany.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Ukeme Inyang</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one long scroll of full-width bands on a cool "sample paper" ground, content on a 1120px column, violet ink with a lagoon-teal second note */
+:root {
+  --paper: #f5f6f8;
+  --paper-2: #eceaf3;
+  --card: #ffffff;
+  --ink: #1d1a2b;
+  --muted: #5d5a6d;
+  --line: #dcd9e6;
+  --violet: #5b3f8f;
+  --violet-deep: #3b2862;
+  --on-violet: #f4f0fb;
+  --teal: #1f6f6b;
+  --chip: #ebe5f6;
+  --display: "Newsreader", Georgia, "Times New Roman", serif;
+  --body: "Public Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #141220; --paper-2: #1c1830; --card: #1f1b31; --ink: #ece9f5; --muted: #a6a1b8;
+    --line: #322c4a; --violet: #b49ae8; --violet-deep: #2a1f47; --on-violet: #f4f0fb; --teal: #6cc4bd; --chip: #2b2443;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #141220; --paper-2: #1c1830; --card: #1f1b31; --ink: #ece9f5; --muted: #a6a1b8;
+  --line: #322c4a; --violet: #b49ae8; --violet-deep: #2a1f47; --on-violet: #f4f0fb; --teal: #6cc4bd; --chip: #2b2443;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+
+.band { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 72px; }
+.band.tint { background: var(--paper-2); }
+.wrap { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
+.narrow { max-width: 760px; }
+
+h1, h2, h3 { font-family: var(--display); font-weight: 600; text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2.6rem, 6vw, 4.4rem); line-height: 1.02; }
+h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); line-height: 1.12; }
+h3 { font-size: 1.25rem; line-height: 1.25; }
+p { margin: 0; }
+.lede { font-size: 1.15rem; color: var(--muted); max-width: 62ch; }
+.eyebrow { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); font-weight: 500; }
+.head { display: flex; flex-direction: column; gap: 12px; }
+a { color: var(--violet); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 6px; }
+
+/* Nav */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 12px; }
+.nav .wrap { flex-direction: row; align-items: center; justify-content: space-between; gap: 16px; }
+.brand { font-family: var(--display); font-size: 1.3rem; font-weight: 600; color: var(--ink); text-decoration: none; }
+.nav ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; }
+.nav ul a { color: var(--ink); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+.nav ul a:hover { color: var(--violet); }
+@media (max-width: 1040px) { .nav .wrap > ul { display: none; } }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.burger { width: 44px; height: 44px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; padding: 0; }
+.burger span { display: block; width: 20px; height: 2px; background: var(--ink); border-radius: 2px; transition: transform .2s ease, opacity .2s ease; }
+.burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media (prefers-reduced-motion: reduce) { .burger span { transition: none; } }
+.menu { max-width: 1120px; margin: 0 auto; padding-top: 12px; }
+.menu ul { list-style: none; margin: 0; padding: 8px 0 4px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; border-top: 1px solid var(--line); max-height: calc(100vh - 120px); overflow-y: auto; }
+.menu a { display: block; padding: 12px 4px; color: var(--ink); text-decoration: none; font-weight: 500; border-bottom: 1px solid var(--line); }
+.menu a:hover { color: var(--violet); }
+@media (max-width: 560px) { .menu ul { grid-template-columns: 1fr; } .nav-cta { display: none; } }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 22px; border-radius: 999px; font: 600 0.95rem var(--body); text-decoration: none; border: 1.5px solid var(--violet); cursor: pointer; }
+.btn.solid { background: var(--violet); color: var(--paper); }
+.btn.ghost { background: transparent; color: var(--violet); }
+.btn:hover { filter: brightness(1.08); }
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Hero */
+.hero .wrap { display: grid; grid-template-columns: 1.35fr 1fr; gap: 48px; align-items: center; }
+.hero-text { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+.role { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--violet); }
+.log { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.mono-badge { width: 72px; height: 72px; border-radius: 50%; background: var(--violet); color: var(--paper); display: grid; place-items: center; font-family: var(--display); font-size: 1.8rem; font-weight: 600; }
+.log-title { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.stations { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.stations li { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 10px 0; border-top: 1px dashed var(--line); }
+.stations .place { font-weight: 600; }
+.stations .what { grid-column: 1 / -1; color: var(--muted); font-size: 0.9rem; }
+.stations .coord { font-family: var(--mono); font-size: 0.78rem; color: var(--teal); font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (max-width: 860px) { .hero .wrap { grid-template-columns: 1fr; } }
+
+/* Institutions */
+.inst { border-block: 1px solid var(--line); }
+.inst .wrap { flex-direction: row; flex-wrap: wrap; gap: 14px 36px; justify-content: center; }
+.inst span { font-weight: 500; color: var(--muted); }
+.inst.band { padding-block: 26px; }
+
+/* Grids */
+.grid { display: grid; gap: 20px; }
+.g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 900px) { .g3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .g3, .g2 { grid-template-columns: 1fr; } }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.card p { color: var(--muted); }
+
+/* Skills list: no cards, ruled rows */
+.skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; }
+.skill { padding: 20px 0; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.skill p { color: var(--muted); }
+.tag { font-family: var(--mono); font-size: 0.72rem; color: var(--teal); letter-spacing: 0.06em; text-transform: uppercase; }
+@media (max-width: 680px) { .skills { grid-template-columns: 1fr; } }
+
+/* Research */
+.study { display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding: 24px 0; border-top: 1px solid var(--line); }
+.study:last-of-type { border-bottom: 1px solid var(--line); }
+.study .meta { font-family: var(--mono); font-size: 0.8rem; color: var(--teal); display: flex; flex-direction: column; gap: 4px; }
+.study div:last-child { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.study p { color: var(--muted); }
+.note { font-size: 0.95rem; color: var(--muted); }
+.study .meta span:first-child { font-weight: 500; color: var(--violet); }
+.facts { display: flex; flex-wrap: wrap; gap: 12px; margin-block: 6px; }
+.facts > div { background: var(--chip); border-radius: 10px; padding: 10px 14px; display: flex; flex-direction: column; min-width: 120px; flex: 1 1 120px; }
+.facts strong { font-family: var(--display); font-size: 1.5rem; font-weight: 600; color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.facts span { font-size: 0.82rem; color: var(--muted); }
+.bars { margin: 6px 0; display: flex; flex-direction: column; gap: 8px; max-width: 560px; }
+.bars figcaption { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.bar { display: grid; grid-template-columns: 72px 1fr 52px; align-items: center; gap: 10px; font-size: 0.85rem; }
+.bar .m { color: var(--muted); }
+.bar .track { height: 12px; background: var(--chip); border-radius: 6px; overflow: hidden; }
+.bar .fill { display: block; height: 100%; background: var(--teal); border-radius: 6px; }
+.bar .v { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; color: var(--ink); }
+.jump { display: flex; flex-wrap: wrap; gap: 8px; }
+.jump a { font: 500 0.85rem var(--body); padding: 6px 14px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+.jump a:hover { border-color: var(--violet); color: var(--violet); }
+.pipeline-wrap { display: flex; flex-direction: column; gap: 16px; scroll-margin-top: 90px; }
+.pipeline { list-style: none; counter-reset: step; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.pipeline li { counter-increment: step; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.pipeline li::before { content: "Step " counter(step); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); }
+.pipeline span { color: var(--muted); font-size: 0.92rem; }
+@media (max-width: 900px) { .pipeline { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .pipeline { grid-template-columns: 1fr; } }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; }
+.tools span { font-family: var(--mono); font-size: 0.8rem; padding: 4px 10px; border-radius: 6px; background: var(--chip); color: var(--ink); }
+.figs { display: flex; flex-direction: column; gap: 28px; }
+.fig { margin: 0; display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 28px; align-items: start; padding-top: 28px; border-top: 1px solid var(--line); scroll-margin-top: 90px; }
+.fig:nth-child(even) .plate { order: 2; }
+.plate { position: relative; display: block; background: #ffffff; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+.plate canvas { pointer-events: none; display: block; width: 100%; height: auto; border-radius: 4px; }
+.plate img { pointer-events: none; display: block; width: 100%; height: auto; border-radius: 4px; }
+.fig figcaption { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.fig figcaption p { color: var(--muted); }
+.shield { position: absolute; inset: 0; }
+@media print { .plate { visibility: hidden; } }
+.fnum { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); }
+@media (max-width: 820px) { .fig { grid-template-columns: 1fr; } .fig:nth-child(even) .plate { order: 0; } }
+.tbl-wrap { overflow-x: auto; }
+.tbl { border-collapse: collapse; width: 100%; font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+.tbl th, .tbl td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); }
+.tbl th { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.tbl td:not(:first-child), .tbl th:not(:first-child) { text-align: right; font-family: var(--mono); }
+.pubs { display: flex; flex-direction: column; gap: 12px; }
+.pubs ol { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 10px; color: var(--muted); }
+.pubs strong { color: var(--ink); }
+.timeline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.timeline li { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 22px 0; border-top: 1px solid var(--line); }
+.timeline li:last-child { border-bottom: 1px solid var(--line); }
+.timeline .when { font-family: var(--mono); font-size: 0.8rem; color: var(--teal); padding-top: 4px; }
+.timeline li > div { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.timeline .by { font-size: 0.9rem; color: var(--violet); font-weight: 500; }
+.timeline p:not(.by) { color: var(--muted); }
+@media (max-width: 620px) { .timeline li { grid-template-columns: 1fr; gap: 8px; } }
+.sub { font-size: clamp(1.4rem, 2.6vw, 1.8rem); }
+#training { margin-top: 24px; }
+section[id], header[id], #training { scroll-margin-top: 80px; }
+.certs { display: flex; flex-direction: column; }
+.cert { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 22px 0; border-top: 1px solid var(--line); }
+.cert:last-child { border-bottom: 1px solid var(--line); }
+.cert .when { font-family: var(--mono); font-size: 0.8rem; color: var(--teal); font-variant-numeric: tabular-nums; padding-top: 4px; }
+.cert > div { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.cert .by { font-size: 0.88rem; color: var(--violet); font-weight: 500; }
+.cert p:not(.by) { color: var(--muted); }
+@media (max-width: 620px) { .cert { grid-template-columns: 1fr; gap: 8px; } }
+.code-wrap { display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 90px; }
+.code-list { display: flex; flex-direction: column; gap: 10px; }
+.code { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 0 18px; }
+.code summary { cursor: pointer; list-style: none; padding: 14px 0; font-weight: 600; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; }
+.code summary::-webkit-details-marker { display: none; }
+.code .file { font-family: var(--mono); font-size: 0.78rem; font-weight: 400; color: var(--teal); }
+.code pre { margin: 0 0 16px; padding: 14px 16px; background: var(--paper-2); border-radius: 8px; overflow-x: auto; }
+.code code { font-family: var(--mono); font-size: 0.82rem; line-height: 1.55; color: var(--ink); white-space: pre; }
+.gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+@media (max-width: 980px) { .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 680px) { .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } }
+.spec { margin: 0; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.spec .plate { padding: 0; overflow: hidden; border-radius: 12px; background: #1d1a2b; aspect-ratio: 3 / 4; max-width: 100%; }
+.spec .plate canvas { width: 100%; height: 100%; border-radius: 0; }
+.spec figcaption { display: flex; flex-direction: column; gap: 2px; font-size: 0.9rem; }
+.spec figcaption strong { font-family: var(--display); font-size: 1.1rem; font-weight: 600; }
+.spec figcaption span:last-child { color: var(--muted); }
+.spec .grp { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); }
+.taxa { display: flex; flex-direction: column; gap: 12px; }
+.taxa-tbl th { font-family: var(--body); font-size: 0.9rem; letter-spacing: 0; text-transform: none; color: var(--ink); font-weight: 600; width: 34%; vertical-align: top; }
+.taxa-tbl td { text-align: left !important; font-family: var(--body) !important; color: var(--muted); }
+.cred { font-size: 0.9rem; border-left: 2px solid var(--line); padding-left: 12px; }
+@media (max-width: 680px) { .study { grid-template-columns: 1fr; gap: 10px; } }
+
+/* Before / after */
+.compare { display: grid; grid-template-columns: 1fr 1fr; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); }
+.compare > div { padding: 28px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.compare .before { background: var(--card); }
+.compare .after { background: var(--violet-deep); color: var(--on-violet); }
+.compare .after .eyebrow { color: var(--on-violet); opacity: 0.8; }
+.compare ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; }
+@media (max-width: 680px) { .compare { grid-template-columns: 1fr; } }
+
+/* Recognition */
+.award .yr { font-family: var(--mono); font-size: 0.8rem; color: var(--teal); }
+.refs { color: var(--muted); border-top: 1px solid var(--line); padding-top: 20px; }
+
+/* Work with me */
+.offer ul { margin: 0; padding-left: 20px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.offer .btn { margin-top: 10px; align-self: flex-start; }
+.offer.feature { border-color: var(--violet); border-width: 1.5px; }
+
+/* CV panel */
+.cv { background: var(--violet-deep); color: var(--on-violet); border-radius: 20px; padding: 36px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; }
+.cv .eyebrow { color: var(--on-violet); opacity: 0.8; }
+.cv p, .cv li { color: var(--on-violet); opacity: 0.88; }
+.cv ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+.cv > div { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.cv .box { background: color-mix(in srgb, var(--on-violet) 8%, transparent); border: 1px solid color-mix(in srgb, var(--on-violet) 22%, transparent); border-radius: 14px; padding: 22px; gap: 12px; }
+.cv .btn.solid { background: var(--on-violet); color: var(--violet-deep); border-color: var(--on-violet); }
+@media (max-width: 760px) { .cv { grid-template-columns: 1fr; padding: 24px; } }
+
+/* Copyable contact */
+.copyrow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.addr { font-family: var(--mono); font-size: 0.92rem; user-select: all; overflow-wrap: anywhere; }
+.copy { font: 500 0.8rem var(--body); padding: 6px 12px; border-radius: 999px; border: 1px solid currentColor; background: transparent; color: inherit; cursor: pointer; }
+
+/* FAQ */
+details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 0 22px; }
+details + details { margin-top: 12px; }
+summary { cursor: pointer; list-style: none; padding: 18px 0; font-weight: 600; display: flex; justify-content: space-between; gap: 16px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; color: var(--teal); font-family: var(--mono); font-size: 1.2rem; line-height: 1; }
+details[open] summary::after { content: "\2212"; }
+details p { color: var(--muted); padding-bottom: 18px; }
+
+/* Closing + footer */
+.close { background: var(--violet); color: var(--paper); text-align: center; }
+.close .wrap { align-items: center; }
+.close p { opacity: 0.9; max-width: 56ch; }
+.close .btn.ghost.light { color: var(--paper); border-color: var(--paper); }
+footer .flink { color: var(--on-violet); }
+.close .btn.solid { background: var(--paper); color: var(--violet); border-color: var(--paper); }
+footer { background: var(--violet-deep); color: var(--on-violet); }
+footer.band { padding-block: 48px 32px; }
+footer .cols { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; }
+footer .cols > div { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+footer .small { opacity: 0.75; font-size: 0.88rem; border-top: 1px solid color-mix(in srgb, var(--on-violet) 18%, transparent); padding-top: 18px; }
+footer .k { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; }
+@media (max-width: 620px) { footer .cols { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="#top">Ukeme Inyang</a>
+    <ul>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#species">Species</a></li>
+      <li><a href="#analysis">Data analysis</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#roles">Roles</a></li>
+      <li><a href="#work">Work with me</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a class="btn solid nav-cta" href="#contact">Get in touch</a>
+      <button class="burger" type="button" id="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="menu" id="site-menu" hidden>
+    <ul>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#species">Species found</a></li>
+        <li><a href="#analysis">Data analysis</a></li>
+        <li><a href="#experience">Experience and education</a></li>
+        <li><a href="#roles">Roles</a></li>
+        <li><a href="#recognition">Awards and publications</a></li>
+        <li><a href="#training">Training and certificates</a></li>
+        <li><a href="#work">Work with me</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="band hero" id="top">
+  <div class="wrap">
+    <div class="hero-text">
+      <span class="role">Marine ecologist · Environmental data analyst</span>
+      <h1>Ukeme Inyang</h1>
+      <p class="lede">I study coastal and marine ecosystems through field sampling, taxonomic identification and statistical analysis. My work runs from zooplankton surveys in the Lagos Lagoon to data quality control for international fisheries projects at the Thünen Institute in Bremerhaven. Alongside the science, I design digital products in Figma and lead teams and projects.</p>
+      <div class="btns">
+        <a class="btn solid" href="#contact">Get in touch</a>
+        <a class="btn ghost" href="#analysis">View my data analysis</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/ukeme-inyang/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    <aside class="log" aria-label="Where the work has happened">
+      <div class="mono-badge" aria-hidden="true">UI</div>
+      <span class="log-title">Where the work has happened</span>
+      <ul class="stations">
+        <li><span class="place">Port Harcourt, Nigeria</span><span class="coord">4.82°N 7.03°E</span><span class="what">BSc Fisheries (Honours)</span></li>
+        <li><span class="place">Lagos, Nigeria</span><span class="coord">6.52°N 3.39°E</span><span class="what">MSc Marine Pollution and Management, lagoon fieldwork</span></li>
+        <li><span class="place">Bremen, Germany</span><span class="coord">53.08°N 8.80°E</span><span class="what">MSc Marine Biology (ISATEC), DAAD scholar</span></li>
+        <li><span class="place">Bremerhaven, Germany</span><span class="coord">53.55°N 8.58°E</span><span class="what">Thünen Institute of Sea Fisheries</span></li>
+      </ul>
+    </aside>
+  </div>
+</header>
+
+<section class="band inst" aria-label="Institutions">
+  <div class="wrap">
+    <span>University of Bremen</span>
+    <span>University of Lagos</span>
+    <span>University of Port Harcourt</span>
+    <span>Thünen Institute of Sea Fisheries</span>
+    <span>DAAD Scholar</span>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap narrow">
+    <div class="head">
+      <span class="eyebrow">The problem</span>
+      <h2>Coastal ecosystems are changing faster than our data can keep up</h2>
+      <p class="lede">Tropical lagoons like Lagos and Badagry support millions of livelihoods, yet the baseline data needed to protect them is often thin, scattered across institutions, or stored in formats nobody downstream can use. Temperate fisheries face their own pressure from shifting stocks and warming water.</p>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:32px">
+    <div class="grid g3">
+      <div class="card"><h3>Fragmented monitoring</h3><p>Zooplankton, benthic and water-quality data are collected in isolated projects that rarely connect with each other.</p></div>
+      <div class="card"><h3>The overlooked middle step</h3><p>Between a net tow and a policy brief lie months of microscopy, cleaning and statistics. This work is easy to underfund and easy to skip.</p></div>
+      <div class="card"><h3>Fieldwork on tight resources</h3><p>Labs in the Global South often work with fewer instruments and smaller budgets, so every result has to be earned with care and improvisation.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band tint" id="skills">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">What I bring</span>
+      <h2>Field-tested skills that turn raw samples into decisions</h2>
+    </div>
+    <div class="skills">
+      <div class="skill"><span class="tag">Field and lab</span><h3>Sampling and identification</h3><p>Zooplankton and benthos sampling, water-quality measurement, microscopy and taxonomic identification.</p></div>
+      <div class="skill"><span class="tag">Analysis</span><h3>Statistical and ecological modelling</h3><p>R and Python (tidyverse, vegan, ggplot2, sf), diversity indices, cluster analysis, NMDS and correlation analysis, population dynamics with FiSAT and PopDyn, introductory NPZD modelling and machine learning.</p></div>
+      <div class="skill"><span class="tag">GIS</span><h3>Spatial analysis and mapping</h3><p>QGIS, shapefiles, raster and vector operations, projections and overlays for research-grade maps.</p></div>
+      <div class="skill"><span class="tag">Data management</span><h3>Reproducible workflows</h3><p>Git and GitHub, plus data quality control and harmonisation on international projects such as DIASPARA at the Thünen Institute.</p></div>
+      <div class="skill"><span class="tag">Design</span><h3>Product design and UI/UX</h3><p>User interface and experience design with Figma and Canva, from first concept to finished design, with formal 9Yards UI/UX training.</p></div>
+      <div class="skill"><span class="tag">Leadership</span><h3>Project management</h3><p>One year as Project Manager for the Nigerian Scholars in Germany (NiSIG) Bremen chapter, plus training in project management and transformational leadership.</p></div>
+      <div class="skill"><span class="tag">Systems</span><h3>Cross-ecosystem, cross-cultural fieldwork</h3><p>From tropical lagoons in Nigeria to North Sea fisheries datasets at the Thünen Institute, with training at Nigerian and German institutions.</p></div>
+      <div class="skill"><span class="tag">Writing</span><h3>Science communication</h3><p>Clear writing and visuals that make dense ecological findings readable for papers, reports and non-specialist audiences.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="research">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Research</span>
+      <h2>Studies I have carried out</h2>
+    </div>
+    <div>
+      <article class="study">
+        <div class="meta"><span>MSc thesis, 2025</span><span>University of Bremen</span><span>Lagos Lagoon, Nigeria</span></div>
+        <div>
+          <h3>Mesozooplankton community of the Lagos Lagoon, south-west Nigeria</h3>
+          <p>I tested how zooplankton communities change along the lagoon, from river-influenced stations through the mid-lagoon to the ocean-facing coast, and across the shift from wet to dry season. I sampled 10 stations each month from October to December 2024 with a 55 µm plankton net, then sub-sampled with a Motoda splitter and identified and counted every sample under the stereomicroscope.</p>
+          <div class="facts">
+            <div><strong>36</strong><span>taxa from 9 phyla</span></div>
+            <div><strong>2.3</strong><span>Shannon diversity (H′)</span></div>
+            <div><strong>0.63</strong><span>evenness (J′)</span></div>
+            <div><strong>29</strong><span>stations sampled</span></div>
+          </div>
+          <figure class="bars" aria-label="Mean mesozooplankton abundance by month">
+            <figcaption>Abundance by month, ind. m<sup>−3</sup></figcaption>
+            <div class="bar"><span class="m">Oct 2024</span><span class="track"><span class="fill" style="width:3.7%"></span></span><span class="v">25.3</span></div>
+            <div class="bar"><span class="m">Nov 2024</span><span class="track"><span class="fill" style="width:40.3%"></span></span><span class="v">272.1</span></div>
+            <div class="bar"><span class="m">Dec 2024</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="v">675.7</span></div>
+          </figure>
+          <p>Cyclopoid copepods dominated in the wet season and calanoid copepods in the dry season, as rising salinity turned a freshwater community into a marine one. Abundance peaked in the mid-lagoon every month. Besides salinity, temperature, phosphate, chemical oxygen demand and trace metals emerged as key drivers, which points to growing human pressure on the lagoon. I ran the analysis in R with the vegan package, using Bray-Curtis cluster analysis and NMDS ordination with fitted environmental variables.</p>
+          <p class="cred">Supervisors: PD Dr. Barbara Niehoff (Alfred Wegener Institute) and Prof. Ikenna Charles Onyema (University of Lagos). A journal manuscript is in preparation. <a href="#analysis">See the full analysis</a>.</p>
+        </div>
+      </article>
+      <article class="study">
+        <div class="meta"><span>MSc thesis, 2019 to 2021</span><span>University of Lagos</span><span>Lagos and Badagry lagoons</span></div>
+        <div>
+          <h3>Bacterial communities and water quality in the Lagos and Badagry lagoons</h3>
+          <p>I investigated how bacterial communities relate to physicochemical water quality at five stations in the Lagos Lagoon and two in the Badagry Lagoon. I measured water parameters including dissolved oxygen and biochemical oxygen demand, isolated bacteria on selective media, counted colonies and confirmed isolates with biochemical tests. Selected isolates were identified by 16S rDNA sequencing at an external laboratory, and I analysed the resulting data myself. I also coordinated sampling days, procurement of materials and laboratory schedules for our student team.</p>
+          <div class="facts">
+            <div><strong>270 × 10<sup>7</sup></strong><span>CFU/mL, Lagos Lagoon</span></div>
+            <div><strong>210 × 10<sup>7</sup></strong><span>CFU/mL, Badagry Lagoon</span></div>
+            <div><strong>7</strong><span>sampling stations</span></div>
+          </div>
+          <p>Sequencing matched the isolates to <em>Escherichia coli</em>, <em>Enterobacter aerogenes</em>, <em>Bacillus subtilis</em>, <em>B. amyloliquefaciens</em>, <em>B. cereus</em> and <em>Brevibacillus agri</em>. Both lagoons showed high levels of bacteria that are pathogenic to fish and people, so their water is unsafe for domestic use without treatment.</p>
+        </div>
+      </article>
+      <article class="study">
+        <div class="meta"><span>MSc coursework, 2023 to 2025</span><span>University of Bremen</span><span>Wadden Sea, Germany</span></div>
+        <div>
+          <h3>Intertidal benthic macrofauna</h3>
+          <p>Coursework project in which I sampled benthic macrofauna on foot across the intertidal flats, identified polychaetes, bivalves and amphipods under the microscope, and calculated diversity indices in R to assess abundance trends.</p>
+        </div>
+      </article>
+      <article class="study">
+        <div class="meta"><span>BSc research, 2014 to 2015</span><span>University of Port Harcourt</span><span>New Calabar River, Nigeria</span></div>
+        <div>
+          <h3>Population dynamics of two West African fish species</h3>
+          <p>A six-month field study of the blackchin tilapia <em>Sarotherodon melanotheron</em> and the Madeiran sardinella <em>Sardinella maderensis</em> with bi-weekly artisanal cast-net sampling. I analysed length-weight relationships and condition factor, and estimated growth, mortality and exploitation rates with FiSAT and PopDyn.</p>
+        </div>
+      </article>
+    </div>
+    <p class="note">The full analysis behind the Lagos Lagoon study, with figures, is in the <a href="#analysis">data analysis section</a>.</p>
+  </div>
+</section>
+
+<section class="band tint" id="species">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Species found</span>
+      <h2>Under the microscope: zooplankton of the Lagos Lagoon</h2>
+      <p class="lede">Specimens I photographed through the stereomicroscope while identifying the samples from my 2024 survey, from freshwater water fleas at the river end of the lagoon to marine larvae near the Atlantic.</p>
+    </div>
+    <div class="gallery">
+      <figure class="spec">
+        <div class="plate" draggable="false"><canvas class="pic" data-src="species/sp01.webp" role="img" aria-label="Microscope photo: Cyclopoid copepod, female carrying paired egg sacs" width="900" height="1200"></canvas><span class="shield" aria-hidden="true"></span></div>
+        <figcaption><span class="grp">Copepoda</span><strong>Cyclopoid copepod</strong><span>Female carrying paired egg sacs</span></figcaption>
+      </figure>
+      <figure class="spec">
+        <div class="plate" draggable="false"><canvas class="pic" data-src="species/sp02.webp" role="img" aria-label="Microscope photo: Copepod, dorsal view" width="900" height="1200"></canvas><span class="shield" aria-hidden="true"></span></div>
+        <figcaption><span class="grp">Copepoda</span><strong>Copepod</strong><span>Dorsal view</span></figcaption>
+      </figure>
+      <figure class="spec">
+        <div class="plate" draggable="false"><canvas class="pic" data-src="species/sp03.webp" role="img" aria-label="Microscope photo: Cladoceran, water flea with branched swimming antennae" width="900" height="1200"></canvas><span class="shield" aria-hidden="true"></span></div>
+        <figcaption><span class="grp">Cladocera</span><strong>Cladoceran</strong><span>Water flea with branched swimming antennae</span></figcaption>
+      </figure>
+      <figure class="spec">
+        <div class="plate" draggable="false"><canvas class="pic" data-src="species/sp04.webp" role="img" aria-label="Microscope photo: Cladoceran, swimming antennae extended" width="900" height="1200"></canvas><span class="shield" aria-hidden="true"></span></div>
+        <figcaption><span class="grp">Cladocera</span><strong>Cladoceran</strong><span>Swimming antennae extended</span></figcaption>
+      </figure>
+      <figure class="spec">
+        <div class="plate" draggable="false"><canvas class="pic" data-src="species/sp05.webp" role="img" aria-label="Microscope photo: Cladoceran, lateral view" width="900" height="1200"></canvas><span class="shield" aria-hidden="true"></span></div>
+        <figcaption><span class="grp">Cladocera</span><strong>Cladoceran</strong><span>Lateral view</span></figcaption>
+      </figure>
+      <figure class="spec">
+        <div class="plate" draggable="false"><canvas class="pic" data-src="species/sp06.webp" role="img" aria-label="Microscope photo: Evadne, marine water flea with a pointed brood pouch" width="900" height="1200"></canvas><span class="shield" aria-hidden="true"></span></div>
+        <figcaption><span class="grp">Cladocera</span><strong><em>Evadne</em></strong><span>Marine water flea with a pointed brood pouch</span></figcaption>
+      </figure>
+      <figure class="spec">
+        <div class="plate" draggable="false"><canvas class="pic" data-src="species/sp07.webp" role="img" aria-label="Microscope photo: Decapod larva, stalked eyes and swimming legs" width="900" height="1200"></canvas><span class="shield" aria-hidden="true"></span></div>
+        <figcaption><span class="grp">Malacostraca</span><strong>Decapod larva</strong><span>Stalked eyes and swimming legs</span></figcaption>
+      </figure>
+      <figure class="spec">
+        <div class="plate" draggable="false"><canvas class="pic" data-src="species/sp08.webp" role="img" aria-label="Microscope photo: Decapod larva, dorsal view with tail fan" width="900" height="1200"></canvas><span class="shield" aria-hidden="true"></span></div>
+        <figcaption><span class="grp">Malacostraca</span><strong>Decapod larva</strong><span>Dorsal view with tail fan</span></figcaption>
+      </figure>
+      <figure class="spec">
+        <div class="plate" draggable="false"><canvas class="pic" data-src="species/sp09.webp" role="img" aria-label="Microscope photo: Crustacean, lateral view" width="900" height="1200"></canvas><span class="shield" aria-hidden="true"></span></div>
+        <figcaption><span class="grp">Arthropoda</span><strong>Crustacean</strong><span>Lateral view</span></figcaption>
+      </figure>
+      <figure class="spec">
+        <div class="plate" draggable="false"><canvas class="pic" data-src="species/sp10.webp" role="img" aria-label="Microscope photo: Ostracod, seed shrimp in its bivalved shell" width="900" height="1200"></canvas><span class="shield" aria-hidden="true"></span></div>
+        <figcaption><span class="grp">Ostracoda</span><strong>Ostracod</strong><span>Seed shrimp in its bivalved shell</span></figcaption>
+      </figure>
+      <figure class="spec">
+        <div class="plate" draggable="false"><canvas class="pic" data-src="species/sp11.webp" role="img" aria-label="Microscope photo: Bivalve larva, shelled larval stage" width="900" height="1200"></canvas><span class="shield" aria-hidden="true"></span></div>
+        <figcaption><span class="grp">Mollusca</span><strong>Bivalve larva</strong><span>Shelled larval stage</span></figcaption>
+      </figure>
+      <figure class="spec">
+        <div class="plate" draggable="false"><canvas class="pic" data-src="species/sp12.webp" role="img" aria-label="Microscope photo: Gastropod larva, coiled larval shell" width="900" height="1200"></canvas><span class="shield" aria-hidden="true"></span></div>
+        <figcaption><span class="grp">Mollusca</span><strong>Gastropod larva</strong><span>Coiled larval shell</span></figcaption>
+      </figure>
+      <figure class="spec">
+        <div class="plate" draggable="false"><canvas class="pic" data-src="species/sp13.webp" role="img" aria-label="Microscope photo: Rotifer, sac-shaped body" width="900" height="1200"></canvas><span class="shield" aria-hidden="true"></span></div>
+        <figcaption><span class="grp">Rotifera</span><strong>Rotifer</strong><span>Sac-shaped body</span></figcaption>
+      </figure>
+      <figure class="spec">
+        <div class="plate" draggable="false"><canvas class="pic" data-src="species/sp14.webp" role="img" aria-label="Microscope photo: Oikopleura, appendicularian trunk" width="900" height="1200"></canvas><span class="shield" aria-hidden="true"></span></div>
+        <figcaption><span class="grp">Chordata</span><strong><em>Oikopleura</em></strong><span>Appendicularian trunk</span></figcaption>
+      </figure>
+    </div>
+    <p class="note">All photographs are my own original work. © Ukeme E. Inyang. They may not be copied, downloaded or reused without my written permission.</p>
+    <div class="taxa">
+      <h3 class="sub">All taxa recorded, October to December 2024</h3>
+      <div class="tbl-wrap">
+        <table class="tbl taxa-tbl">
+          <tbody>
+          <tr><th scope="row">Arthropoda: copepods</th><td>Acartia, Paracalanus, Cyclopina, Oithona, Eucyclops, Euterpina, Microsetella, copepod nauplii</td></tr>
+          <tr><th scope="row">Arthropoda: cladocerans</th><td>Daphnia, Diaphanosoma, Evadne</td></tr>
+          <tr><th scope="row">Arthropoda: other crustaceans</th><td>Scalpellum (barnacle), Ostracoda, Amphipoda, Cumacea, Mysidae, Lucifer, Penaeus, Macrobrachium, Callinectes, Cardisoma, other Decapoda</td></tr>
+          <tr><th scope="row">Arthropoda: insects</th><td>Ephemeroptera (mayfly larvae)</td></tr>
+          <tr><th scope="row">Rotifera</th><td>Brachionus, Asplanchna, Trichocerca, Lecane</td></tr>
+          <tr><th scope="row">Mollusca</th><td>Bivalvia, Gastropoda, Cephalopoda</td></tr>
+          <tr><th scope="row">Cnidaria</th><td>Obelia, Siphonophorae, other Cnidaria</td></tr>
+          <tr><th scope="row">Chordata</th><td>Oikopleura, fish eggs and larvae (Osteichthyes)</td></tr>
+          <tr><th scope="row">Annelida</th><td>Polychaeta</td></tr>
+          <tr><th scope="row">Chaetognatha</th><td>Sagitta</td></tr>
+          <tr><th scope="row">Bryozoa</th><td>Membranipora</td></tr>
+          <tr><th scope="row">Echinodermata</th><td>Ophiura</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="analysis">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Data analysis</span>
+      <h2>Inside the analysis: Lagos Lagoon mesozooplankton, 2024</h2>
+      <p class="lede">How I turned 29 plankton samples and their matching water data into answers about what structures the lagoon's zooplankton. Every figure below comes from my MSc thesis and was produced in R.</p>
+    </div>
+
+    <nav class="jump" aria-label="Jump to an analysis">
+      <a href="#a-workflow">Workflow</a>
+      <a href="#a-code">R code</a>
+      <a href="#a-map">Study design</a>
+      <a href="#a-abundance">Abundance</a>
+      <a href="#a-diversity">Diversity</a>
+      <a href="#a-cluster">Clustering</a>
+      <a href="#a-correlation">Correlation</a>
+      <a href="#a-nmds">Ordination</a>
+    </nav>
+
+    <div id="a-workflow" class="pipeline-wrap">
+      <h3>Workflow</h3>
+      <ol class="pipeline">
+        <li><strong>Sample</strong><span>10 stations along the river, mid-lagoon and coastal regions, monthly from October to December 2024. Horizontal hauls with a 55 µm plankton net (30 cm mouth), preserved in 4% formalin. Surface water analysed for physical and chemical parameters, nutrients, trace metals and chlorophyll pigments.</span></li>
+        <li><strong>Count and identify</strong><span>Sub-sampling with a Motoda splitter, counting on a Bogorov plate and identification under a stereomicroscope at 20 to 40× magnification.</span></li>
+        <li><strong>Standardise</strong><span>Abundance (ind. m<sup>−3</sup>) = organisms counted × splitting ratio ÷ volume of water filtered.</span></li>
+        <li><strong>Describe</strong><span>Shannon-Wiener diversity (H′) and Pielou's evenness (J′) for every station and month.</span></li>
+        <li><strong>Group</strong><span>Hierarchical clustering of stations: Bray-Curtis dissimilarity on log-transformed abundance for the community, Euclidean distance with Ward.D2 on scaled variables for the environment.</span></li>
+        <li><strong>Relate</strong><span>Pearson correlation among variables, then NMDS ordination on Hellinger-transformed abundance with environmental variables fitted by envfit (999 permutations).</span></li>
+      </ol>
+      <p class="tools"><span>R 4.5.0</span><span>vegan</span><span>tidyverse</span><span>dplyr</span><span>ggplot2</span><span>sf</span></p>
+    </div>
+
+    <div id="a-code" class="code-wrap">
+      <h3>The R code</h3>
+      <p class="note">The full analysis is organised as a reproducible R project of six scripts, run in order by one command. Open a step to see the core code.</p>
+      <div class="code-list">
+        <details class="code">
+          <summary><span>Diversity indices</span><span class="file">R/03_diversity.R</span></summary>
+          <pre><code>diversity_results &lt;- site_info %&gt;%
+  mutate(
+    Shannon_H  = diversity(spe, index = &quot;shannon&quot;),
+    Richness_S = specnumber(spe),
+    Evenness_J = Shannon_H / log(Richness_S)   # Pielou&#x27;s evenness
+  )</code></pre>
+        </details>
+        <details class="code">
+          <summary><span>NMDS ordination</span><span class="file">R/04_ordination.R</span></summary>
+          <pre><code># Hellinger transformation reduces the influence of very abundant taxa
+spe_hel &lt;- decostand(spe, method = &quot;hellinger&quot;)
+
+set.seed(2000)
+nmds &lt;- metaMDS(spe_hel, distance = &quot;bray&quot;, k = 2,
+                trymax = 100, autotransform = FALSE)
+nmds$stress   # below 0.2 is generally acceptable</code></pre>
+        </details>
+        <details class="code">
+          <summary><span>Station clustering</span><span class="file">R/05_environment.R</span></summary>
+          <pre><code>env_scaled  &lt;- scale(select(station_means, -Station_no))
+env_cluster &lt;- hclust(dist(env_scaled, method = &quot;euclidean&quot;),
+                      method = &quot;ward.D2&quot;)</code></pre>
+        </details>
+      </div>
+    </div>
+
+    <div class="figs">
+      <figure class="fig" id="a-map">
+        <div class="plate" draggable="false"><canvas class="pic" data-src="figs/map.webp" role="img" aria-label="Map of the Lagos Lagoon with ten sampling stations coloured by river, mid-lagoon and coastal region" width="1311" height="745"></canvas><span class="shield" aria-hidden="true"></span></div>
+        <figcaption>
+          <span class="fnum">Fig. 1 · Study design</span>
+          <h3>Ten stations across a salinity gradient</h3>
+          <p>Stations 1 to 3 sit in the river-influenced region, 4 to 7 in the mid-lagoon and 8 to 10 near the Atlantic. Rainfall fell from 315.2 mm in October to 59.5 mm in November and none in December, so the sampling captured the full wet-to-dry transition. Map built in R with sf.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="fig" id="a-abundance">
+        <div class="plate" draggable="false"><canvas class="pic" data-src="figs/abundance.webp" role="img" aria-label="Stacked bar charts of mesozooplankton abundance by phylum at ten stations for October, November and December 2024" width="1400" height="840"></canvas><span class="shield" aria-hidden="true"></span></div>
+        <figcaption>
+          <span class="fnum">Fig. 10 · Abundance</span>
+          <h3>Abundance peaks in the mid-lagoon as the dry season sets in</h3>
+          <p>Total abundance rose from 25.3 ind. m<sup>−3</sup> in October to 272.1 in November and 675.7 in December. The mid-lagoon stations held the highest numbers every month, and arthropods, mainly copepods, dominated throughout.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="fig" id="a-diversity">
+        <div class="plate" draggable="false"><canvas class="pic" data-src="figs/shannon.webp" role="img" aria-label="Heatmap of Shannon diversity index by station and month" width="1378" height="827"></canvas><span class="shield" aria-hidden="true"></span></div>
+        <figcaption>
+          <span class="fnum">Fig. 8 · Diversity</span>
+          <h3>Diversity shifts seaward as the season changes</h3>
+          <p>Station-level Shannon diversity ranged from 0.33 to 1.62. In October and November the river stations were the most diverse. By December the pattern reversed, with diversity rising toward the coast as marine taxa moved in.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="fig" id="a-cluster">
+        <div class="plate" draggable="false"><canvas class="pic" data-src="figs/cluster.webp" role="img" aria-label="Dendrogram clustering the ten stations by Bray-Curtis dissimilarity" width="1324" height="913"></canvas><span class="shield" aria-hidden="true"></span></div>
+        <figcaption>
+          <span class="fnum">Fig. 17 · Clustering</span>
+          <h3>Communities split into river and lagoon-coast groups</h3>
+          <p>Bray-Curtis clustering separated the river stations 1 to 3 from stations 4 to 10. Within the second group, the coastal stations 8 to 10 and the mid-lagoon stations 4 to 7 formed their own sub-clusters, with stations 5 and 7 the most similar pair.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="fig" id="a-correlation">
+        <div class="plate" draggable="false"><canvas class="pic" data-src="figs/correlation.webp" role="img" aria-label="Correlation heatmap between zooplankton taxa abundance and environmental parameters" width="1309" height="783"></canvas><span class="shield" aria-hidden="true"></span></div>
+        <figcaption>
+          <span class="fnum">Fig. 19 · Correlation</span>
+          <h3>Linking taxa to their environment</h3>
+          <p>Pearson correlation first screened the environmental data. Salinity, conductivity, hardness and the major ions were almost interchangeable (r &gt; 0.9), and dissolved oxygen fell where BOD and COD were high. This heatmap then relates each taxon's abundance to every parameter.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="fig" id="a-nmds">
+        <div class="plate" draggable="false"><canvas class="pic" data-src="figs/nmds.webp" role="img" aria-label="NMDS ordination of stations coloured by region with month shown by symbol and species vectors" width="1400" height="840"></canvas><span class="shield" aria-hidden="true"></span></div>
+        <figcaption>
+          <span class="fnum">Fig. 20A · Ordination</span>
+          <h3>A clear seasonal transition in community composition</h3>
+          <p>NMDS on Bray-Curtis dissimilarity (stress 0.104) placed October stations tightly together, spread November widely and pulled December apart by region. The plot traces the move from a freshwater to a marine community.</p>
+        </figcaption>
+      </figure>
+
+    </div>
+
+    <p class="note">All figures © Ukeme E. Inyang. Please contact me before reusing them. The analysis of my Lagos and Badagry bacterial study and further projects will be added here.</p>
+  </div>
+</section>
+
+<section class="band" id="experience">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Experience and education</span>
+      <h2>Where I have studied and worked</h2>
+    </div>
+    <ol class="timeline">
+      <li><span class="when">Oct 2026 to present</span><div><h3>Volunteer, Social Media Team, EPOS Survey</h3><p class="by">AGEP, TH Köln (remote)</p><p>I help turn the results of the EPOS survey into social media content for a wider audience, and I create visuals from the survey findings in Canva and Figma.</p></div></li>
+      <li><span class="when">Jan 2026 to present</span><div><h3>Volunteer Neighbourhood Assistant</h3><p class="by">German Red Cross (DRK Kreisverband Bremen)</p></div></li>
+      <li><span class="when">Oct 2024, Jun to Sep 2025</span><div><h3>Student Assistant, Fisheries and Environmental Data Analysis</h3><p class="by">Thünen Institute of Sea Fisheries, Bremerhaven</p><p>Processed and quality-controlled fisheries and environmental datasets, including ICES data, for the DIASPARA project. Built reproducible workflows in R, Python and Excel, ran spatial analyses in QGIS and used Git and GitHub for version control in a team.</p></div></li>
+      <li><span class="when">Oct 2023 to Sep 2025</span><div><h3>MSc Marine Biology (ISATEC)</h3><p class="by">University of Bremen, Germany · DAAD scholar</p><p>Overall grade 1.64, thesis grade 1.3. Selected modules include Ecological Modelling: Populations, Climate, Conservation (1.0), Marine Biodiversity and Food Webs (1.7), Statistics and Mathematical Methods with R for Marine Biologists, and Multi-Disciplinary Oceanography.</p></div></li>
+      <li><span class="when">One year</span><div><h3>Project Manager</h3><p class="by">Nigerian Scholars in Germany (NiSIG), Bremen chapter</p><p>Served as Project Manager of the Bremen chapter for one year.</p></div></li>
+      <li><span class="when">2019 to 2021</span><div><h3>MSc Marine Pollution and Management</h3><p class="by">University of Lagos, Nigeria</p><p>CGPA 4.48 of 5.00. Thesis on bacterial community profiling of the Lagos and Badagry lagoons.</p></div></li>
+      <li><span class="when">2010 to 2016</span><div><h3>BSc Fisheries (Honours)</h3><p class="by">University of Port Harcourt, Nigeria</p><p>Second Class Honours (Upper Division), CGPA 4.47 of 5.00, and Best Graduating Student of the Department of Fisheries. Thesis on the length-weight relationship and condition factor of two fish species in the New Calabar River.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="band tint" id="roles">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Where I can add value</span>
+      <h2>Roles I am ready to step into</h2>
+      <p class="lede">My background spans hands-on research, data science, product work and communication. These are the roles where that combination fits.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card"><h3>Project Manager</h3><p>Served for one year as Project Manager for the Nigerian Scholars in Germany (NiSIG) Bremen chapter. Coordinated multi-institution fieldwork and thesis logistics across Germany and Nigeria. Trained in project management and transformational leadership (2025).</p></div>
+      <div class="card"><h3>Product and UI/UX Designer (Figma)</h3><p>Product and UI/UX design in Figma and Canva, taking ideas from concept to finished designs. Formally trained through the 9Yards UI/UX programme, including a capstone project.</p></div>
+      <div class="card"><h3>Web and App Developer</h3><p>Freelance web and app development alongside product design work, taking ideas from concept to build.</p></div>
+      <div class="card"><h3>Technical Writer</h3><p>Peer-reviewed publications (WAJFAS, Delta Agriculturist), thesis documentation and workflow write-ups that make technical work clear to non-specialists.</p></div>
+      <div class="card"><h3>Data Annotation Specialist</h3><p>Years of precise, standardised taxonomic identification and classification of zooplankton and benthic species under the microscope.</p></div>
+      <div class="card"><h3>Data Visualisation and Analyst</h3><p>R, Python and QGIS workflows that turn raw ecological and fisheries datasets, including the international DIASPARA project, into clear charts and maps.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="expertise">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">The transformation</span>
+      <h2>From scattered samples to decisions people can act on</h2>
+    </div>
+    <div class="compare">
+      <div class="before">
+        <span class="eyebrow">Before</span>
+        <ul>
+          <li>Raw field samples and disconnected spreadsheets</li>
+          <li>One lagoon's data with no comparative context</li>
+          <li>Findings locked in a single thesis document</li>
+          <li>Manual analysis steps that are hard to repeat</li>
+        </ul>
+      </div>
+      <div class="after">
+        <span class="eyebrow">After</span>
+        <ul>
+          <li>Indexed, analysable biodiversity data (Shannon, Simpson, Pielou)</li>
+          <li>Maps and models comparing ecosystems across regions</li>
+          <li>Published and in-preparation research others can build on</li>
+          <li>Reproducible R and QGIS pipelines, version-controlled on GitHub</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band tint">
+  <div class="wrap">
+    <div class="cv">
+      <div>
+        <span class="eyebrow">Full CV</span>
+        <h2>Request my research portfolio and CV</h2>
+        <p>A concise overview of my thesis work, field and analysis methods, publications and how they fit together. Useful if you are considering a collaboration, a role or a reference check.</p>
+        <ul>
+          <li>Thesis summaries on Lagos Lagoon zooplankton and Lagos and Badagry bacterial profiling</li>
+          <li>Full technical skill set: R, QGIS, field and lab methods</li>
+          <li>Publications, awards and reference contacts</li>
+        </ul>
+      </div>
+      <div class="box">
+        <strong>Email me to request it</strong>
+        <div class="copyrow">
+          <span class="addr">ukemeinyang09@gmail.com</span>
+          <button class="copy" type="button" id="copy-cv" data-copy="ukemeinyang09@gmail.com">Copy</button>
+        </div>
+        <a class="btn solid" href="mailto:ukemeinyang09@gmail.com?subject=CV%20request">Open email</a>
+        <p style="font-size:0.88rem">I reply personally, usually within a couple of days.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="recognition">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Recognition</span>
+      <h2>Awards, publications and training</h2>
+    </div>
+    <div class="grid g2">
+      <div class="card award"><span class="yr">2023</span><h3>DAAD Scholarship</h3><p>Fully funded MSc at the University of Bremen through Germany's national academic exchange service.</p></div>
+      <div class="card award"><span class="yr">2016</span><h3>Best Graduating Student</h3><p>Department of Fisheries, University of Port Harcourt, BSc Fisheries (Honours).</p></div>
+      <div class="card award"><span class="yr">Publications</span><h3>Published research</h3><p>Co-authored papers in the West African Journal of Fisheries and Aquatic Sciences (2022) and Delta Agriculturist (2017). Full list below.</p></div>
+      <div class="card award"><span class="yr">Experience</span><h3>Research institutions</h3><p>Research roles at the Thünen Institute of Sea Fisheries, the University of Bremen and the University of Lagos.</p></div>
+    </div>
+    <div class="pubs">
+      <h3 class="sub">Publications</h3>
+      <ol>
+        <li><strong>Inyang, U.E.</strong> (in preparation). Mesozooplankton community of the Lagos lagoon, south-west Nigeria.</li>
+        <li>Soyinka et al. (2022). Assessment of heavy metals and public health concern in selected fish species in Lagos. <em>West African Journal of Fisheries and Aquatic Sciences</em>, 2(1), 22 to 30.</li>
+        <li>Francis et al. (2017). Biology and population dynamics of <em>Sarotherodon melanotheron</em> from the New Calabar River. <em>Delta Agriculturist</em>, 9(1), 33 to 46.</li>
+      </ol>
+    </div>
+    <p class="refs">References are available on request, including supervisors at the Alfred Wegener Institute (Bremerhaven) and the Department of Marine Sciences, University of Lagos.</p>
+
+    <div class="head" id="training">
+      <span class="eyebrow">Training and certificates</span>
+      <h3 class="sub">Continuing education in data science, machine learning and German</h3>
+    </div>
+    <div class="certs">
+      <article class="cert">
+        <span class="when">Mar to Aug 2026</span>
+        <div>
+          <h3>German Language Course, A2 to B1</h3>
+          <p class="by">Bremen</p>
+          <p>B1 exam taken in August 2026, result pending.</p>
+        </div>
+      </article>
+      <article class="cert">
+        <span class="when">3, 10 and 17 Dec 2025</span>
+        <div>
+          <h3>Machine Learning Fundamentals with Application Examples</h3>
+          <p class="by">Alfred Wegener Institute, Helmholtz Centre for Polar and Marine Research · 21 hours · Certificate of attendance</p>
+          <p>Overview of machine-learning algorithms, applying them in R and Python, exploratory data analysis, preparing datasets for ML workflows and running the full data science cycle on my own dataset.</p>
+        </div>
+      </article>
+      <article class="cert">
+        <span class="when">14 Jul to 28 Nov 2025</span>
+        <div>
+          <h3>Data Train Operator Track: Data Scientist</h3>
+          <p class="by">U Bremen Research Alliance, Data Train and DataNord · Hands-on workshops · Certificate of participation</p>
+          <p>Machine learning, evaluating machine-learning and AI algorithms, causal learning, visual analytics with GIS, data analysis and visualisation in R and Python, visualisation in Matlab and principles of scientific visualisation.</p>
+        </div>
+      </article>
+      <article class="cert">
+        <span class="when">22 May 2025</span>
+        <div>
+          <h3>Data Train Starter Track</h3>
+          <p class="by">U Bremen Research Alliance, Data Train and DataNord · Online lecture · Certificate of participation</p>
+          <p>Machine learning basics.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band tint" id="work">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Work with me</span>
+      <h2>Ways we could work together</h2>
+    </div>
+    <div class="grid g3">
+      <div class="card offer">
+        <h3>Research collaboration</h3>
+        <p>Joint fieldwork, co-authorship or shared analysis on marine and fisheries projects.</p>
+        <ul><li>Zooplankton and benthic community studies</li><li>Fisheries biology and population dynamics</li><li>Co-authored papers and reports</li></ul>
+        <a class="btn ghost" href="#contact">Propose a project</a>
+      </div>
+      <div class="card offer feature">
+        <h3>Data and spatial support</h3>
+        <p>R and QGIS support for environmental datasets that need cleaning, modelling or mapping.</p>
+        <ul><li>Data cleaning and biodiversity indices</li><li>ggplot2 visualisation for reports</li><li>Spatial overlays and research-grade maps</li></ul>
+        <a class="btn solid" href="#contact">Start a conversation</a>
+      </div>
+      <div class="card offer">
+        <h3>Full-time roles</h3>
+        <p>Open to marine science, fisheries and environmental data positions, including PhD positions, in Europe and beyond.</p>
+        <ul><li>Environmental data analyst</li><li>Research assistant or associate</li><li>Fisheries and ecosystem monitoring</li></ul>
+        <a class="btn ghost" href="#contact">Send an opportunity</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="faq">
+  <div class="wrap narrow">
+    <div class="head">
+      <span class="eyebrow">FAQ</span>
+      <h2>Common questions</h2>
+    </div>
+    <div>
+      <details>
+        <summary>What is your core research focus?</summary>
+        <p>Plankton and benthic communities in coastal and lagoon systems, and the fisheries and environmental data that describe them. I combine field sampling and microscope identification with statistical and spatial analysis.</p>
+      </details>
+      <details>
+        <summary>What tools do you work with day to day?</summary>
+        <p>R (tidyverse, vegan, ggplot2), Python, QGIS and Git with GitHub for analysis and mapping, plus microscopy and taxonomic keys for identification work.</p>
+      </details>
+      <details>
+        <summary>Can you work across different institutions and languages?</summary>
+        <p>Yes. I trained at universities in Nigeria and Germany and have worked with the Thünen Institute in Bremerhaven. I work in English (fluent) and German (intermediate). I took the B1 German exam in August 2026 and am waiting for the result.</p>
+      </details>
+      <details>
+        <summary>How can I get in touch or bring you onto a project?</summary>
+        <p>Email me at ukemeinyang09@gmail.com. A short description of the project or role helps me reply quickly.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="band close" id="contact">
+  <div class="wrap">
+    <h2>Let's turn ocean data into ocean decisions together</h2>
+    <p>Whether it is a research collaboration, a data problem or a full-time role, reach out and let's talk about where your work meets mine.</p>
+    <div class="btns" style="justify-content:center">
+      <a class="btn solid" href="mailto:ukemeinyang09@gmail.com">Email me</a>
+      <a class="btn ghost light" href="https://www.linkedin.com/in/ukeme-inyang/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer class="band">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <span style="font-family:var(--display);font-size:1.3rem;font-weight:600">Ukeme Inyang</span>
+        <p style="opacity:0.85">Marine ecologist and environmental data analyst based in Bremen, Germany.</p>
+      </div>
+      <div>
+        <span class="k">Contact</span>
+        <div class="copyrow"><span class="addr">ukemeinyang09@gmail.com</span><button class="copy" type="button" id="copy-foot" data-copy="ukemeinyang09@gmail.com">Copy</button></div>
+        <span>Bremen, Germany</span>
+        <a class="flink" href="https://www.linkedin.com/in/ukeme-inyang/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    <p class="small">© 2026 Ukeme Emmanuel Inyang. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.copy').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var text = btn.getAttribute('data-copy');
+    var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1800); };
+    var fallback = function () {
+      var el = btn.previousElementSibling;
+      try { var r = document.createRange(); r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Selected'; } catch (e) {}
+    };
+    try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+  });
+});
+(function () {
+  var btn = document.getElementById('menu-toggle');
+  var menu = document.getElementById('site-menu');
+  function setOpen(open) {
+    menu.hidden = !open;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  btn.addEventListener('click', function () { setOpen(menu.hidden); });
+  menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) { setOpen(false); btn.focus(); } });
+  document.addEventListener('click', function (e) { if (!menu.hidden && !menu.contains(e.target) && !btn.contains(e.target)) setOpen(false); });
+})();
+document.querySelectorAll('.plate').forEach(function (el) {
+  ['contextmenu', 'dragstart', 'selectstart', 'copy', 'mousedown'].forEach(function (t) { el.addEventListener(t, function (e) { e.preventDefault(); }); });
+});
+(function () {
+  var pics = document.querySelectorAll('canvas.pic');
+  function draw(c) {
+    if (c.dataset.done) return;
+    c.dataset.done = '1';
+    var im = new Image();
+    im.onload = function () {
+      c.width = im.naturalWidth; c.height = im.naturalHeight;
+      c.getContext('2d').drawImage(im, 0, 0);
+      im.src = '';
+    };
+    im.src = c.dataset.src;
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { draw(e.target); io.unobserve(e.target); } });
+    }, { rootMargin: '600px' });
+    pics.forEach(function (c) { io.observe(c); });
+  } else { pics.forEach(draw); }
+  document.addEventListener('keydown', function (e) {
+    var k = (e.key || '').toLowerCase();
+    if ((e.ctrlKey || e.metaKey) && (k === 's' || k === 'p')) e.preventDefault();
+  });
+})();
+</script>
+
+</body>
+</html>
